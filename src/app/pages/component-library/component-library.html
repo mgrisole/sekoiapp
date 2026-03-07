@@ -1,0 +1,61 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="mb-12">
+    <h1 class="text-3xl font-bold text-white mb-2">Component Library</h1>
+    <p class="text-gray-400">Reusable UI building blocks for the SOC Investigation Console.</p>
+  </div>
+
+  <section class="mb-12">
+    <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Status & Severity</h2>
+    <div class="flex flex-wrap gap-8">
+      <div class="space-y-4">
+        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Severity Badge</h3>
+        <div class="flex gap-2">
+          <app-severity-badge severity="Critical" />
+          <app-severity-badge severity="High" />
+          <app-severity-badge severity="Medium" />
+          <app-severity-badge severity="Low" />
+          <app-severity-badge severity="Info" />
+        </div>
+      </div>
+      <div class="space-y-4">
+        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider">Status Chip</h3>
+        <div class="flex gap-2">
+          <app-status-chip status="New" />
+          <app-status-chip status="In Progress" />
+          <app-status-chip status="Closed" />
+          <app-status-chip status="False Positive" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Metrics & Cards</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <app-metric-card label="Detection Rate" value="94.2%" [change]="5" />
+      <app-metric-card label="False Positives" value="12" [change]="-15" />
+      <app-investigation-node-card [entity]="mockEntity" />
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Timeline</h2>
+    <div class="bg-gray-900/30 p-8 rounded-xl border border-gray-800 max-w-lg">
+      <app-timeline-item [item]="mockTimelineItem" />
+      <app-timeline-item [item]="mockTimelineItem" />
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">Filtering</h2>
+    <app-filter-bar />
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-xl font-bold text-white mb-6 border-b border-gray-800 pb-2">States</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <app-empty-state title="No Investigations Found" message="Try searching with different parameters." />
+      <app-loading-state message="Analyzing graph data..." />
+    </div>
+  </section>
+</div>

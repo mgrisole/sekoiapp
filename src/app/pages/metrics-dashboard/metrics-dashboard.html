@@ -1,0 +1,30 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-white mb-2">Metrics Dashboard</h1>
+    <p class="text-gray-400">Holistic view of alert distribution and incident response performance.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <app-metric-card label="Total Alerts" value="42" [change]="12" />
+    <app-metric-card label="Avg Resolution Time" value="4.2h" [change]="-8" />
+    <app-metric-card label="Active Investigations" value="15" [change]="5" />
+    <app-metric-card label="Critical Alerts" value="3" [change]="0" />
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+    <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-sm">
+      <h3 class="text-lg font-semibold text-white mb-6">Alerts by Severity</h3>
+      <app-base-chart [config]="severityChartConfig()" />
+    </div>
+
+    <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-sm">
+      <h3 class="text-lg font-semibold text-white mb-6">Incident Status Distribution</h3>
+      <app-base-chart [config]="statusChartConfig()" />
+    </div>
+  </div>
+
+  <div class="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-sm">
+    <h3 class="text-lg font-semibold text-white mb-6">Alert Volume (Last 7 Days)</h3>
+    <app-base-chart [config]="timeChartConfig()" />
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex justify-between items-end mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-white mb-2">Active Alerts</h1>
+      <p class="text-gray-400">Monitor and manage suspicious activities across your infrastructure.</p>
+    </div>
+    <div class="text-right">
+      <div class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-1">Total Alerts</div>
+      <div class="text-2xl font-bold text-white">{{ filteredAlerts().length }}</div>
+    </div>
+  </div>
+
+  <app-filter-bar
+    [(search)]="searchTerm"
+    [(severity)]="severityFilter"
+    [(status)]="statusFilter"
+    (reset)="resetFilters()"
+  />
+
+  <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-sm">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-800/50 border-b border-gray-800">
+            <th (click)="updateSort('title')" class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white transition-colors">
+              Alert Title
+              @if (sortField() === 'title') {
+                <span class="ml-1">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+              }
+            </th>
+            <th (click)="updateSort('severity')" class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white transition-colors">
+              Severity
+              @if (sortField() === 'severity') {
+                <span class="ml-1">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+              }
+            </th>
+            <th (click)="updateSort('status')" class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white transition-colors">
+              Status
+              @if (sortField() === 'status') {
+                <span class="ml-1">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+              }
+            </th>
+            <th (click)="updateSort('source')" class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white transition-colors">
+              Source
+              @if (sortField() === 'source') {
+                <span class="ml-1">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+              }
+            </th>
+            <th (click)="updateSort('creationDate')" class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider cursor-pointer hover:text-white transition-colors">
+              Created
+              @if (sortField() === 'creationDate') {
+                <span class="ml-1">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+              }
+            </th>
+            <th class="px-6 py-4 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              Analyst
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-800">
+          @for (alert of filteredAlerts(); track alert.id) {
+            <tr
+              (click)="openInvestigation(alert)"
+              class="hover:bg-gray-800/30 cursor-pointer transition-colors group"
+            >
+              <td class="px-6 py-4">
+                <div class="text-sm font-medium text-white group-hover:text-blue-400 transition-colors">{{ alert.title }}</div>
+                <div class="text-xs text-gray-500 mt-1 line-clamp-1">{{ alert.description }}</div>
+              </td>
+              <td class="px-6 py-4">
+                <app-severity-badge [severity]="alert.severity" />
+              </td>
+              <td class="px-6 py-4">
+                <app-status-chip [status]="alert.status" />
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-400">
+                {{ alert.source }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-400">
+                {{ alert.creationDate | date:'MMM d, HH:mm' }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-400">
+                {{ alert.assignedAnalyst || 'Unassigned' }}
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                <div class="text-lg mb-2">No alerts found</div>
+                <p>Try adjusting your filters or search terms.</p>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
