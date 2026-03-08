@@ -1,0 +1,4 @@
+interface:
+  display_name: "Angular TS Expert"
+  short_description: "Strict Angular + TypeScript, signals, and WCAG-ready patterns."
+  default_prompt: "Use $angular-ts-webapp-expert to implement or review Angular and TypeScript code with strict typing, signal-first state, and WCAG AA accessibility."

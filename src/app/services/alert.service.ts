@@ -6,9 +6,9 @@ import { Alert, Severity, Status, Entity, TimelineItem } from '../models/alert.m
 })
 export class AlertService {
   private readonly alerts = signal<Alert[]>(generateMockAlerts());
-  
-  readonly allAlerts = computed(() => this.alerts());
-  
+
+  readonly allAlerts = this.alerts.asReadonly();
+
   readonly countsBySeverity = computed(() => {
     const counts: Record<Severity, number> = {
       Critical: 0,

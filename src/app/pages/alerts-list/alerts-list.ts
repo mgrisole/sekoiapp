@@ -31,8 +31,8 @@ export class AlertsListPage {
     // Search
     if (this.searchTerm()) {
       const term = this.searchTerm().toLowerCase();
-      alerts = alerts.filter(a => 
-        a.title.toLowerCase().includes(term) || 
+      alerts = alerts.filter(a =>
+        a.title.toLowerCase().includes(term) ||
         a.description.toLowerCase().includes(term) ||
         a.source.toLowerCase().includes(term)
       );
@@ -51,11 +51,11 @@ export class AlertsListPage {
     // Sort
     const field = this.sortField();
     const order = this.sortOrder();
-    
+
     return [...alerts].sort((a, b) => {
       const valA = a[field];
       const valB = b[field];
-      
+
       if (valA! < valB!) return order === 'asc' ? -1 : 1;
       if (valA! > valB!) return order === 'asc' ? 1 : -1;
       return 0;
@@ -77,7 +77,7 @@ export class AlertsListPage {
     this.statusFilter.set('All');
   }
 
-  openInvestigation(alert: Alert) {
-    this.router.navigate(['/investigation', alert.id]);
+  async openInvestigation(alert: Alert) {
+    await this.router.navigate(['/investigation', alert.id]);
   }
 }
