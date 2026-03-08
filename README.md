@@ -57,3 +57,24 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Deploy to GitHub Pages
+
+This repository is configured to deploy automatically to GitHub Pages via GitHub Actions.
+
+1. Push your changes to the `main` branch.
+2. In GitHub, go to `Settings -> Pages`.
+3. Under `Build and deployment`, set `Source` to `GitHub Actions`.
+4. Wait for the `Deploy to GitHub Pages` workflow to finish.
+5. Your site will be available at:
+   - `https://mgrisole.github.io/sekoiapp/`
+
+### Optional local deploy command
+
+If you want to deploy from your machine instead of GitHub Actions:
+
+```bash
+npm run deploy:pages
+```
+
+This builds to `dist/gh-pages/browser` and publishes with `angular-cli-ghpages`.
