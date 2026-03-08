@@ -5,8 +5,8 @@
       <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-start gap-4">
         <div>
           <div class="flex items-center gap-3 mb-2">
-            <app-severity-badge [severity]="a.severity" />
-            <app-status-chip [status]="a.status" />
+            <app-severity-badge [severity]="a.severity"/>
+            <app-status-chip [status]="a.status"/>
             <span class="text-gray-500 text-sm">ID: {{ a.id }}</span>
           </div>
           <h1 class="text-2xl font-bold">{{ a.title }}</h1>
@@ -18,10 +18,10 @@
             <div class="font-medium text-blue-400">{{ a.assignedAnalyst || 'Unassigned' }}</div>
           </div>
           <select
-            [ngModel]="a.status"
-            (ngModelChange)="updateStatus($event)"
-            aria-label="Update alert status"
-            class="bg-blue-600 text-white rounded-lg px-4 py-2 font-medium hover:bg-blue-700 outline-none transition-colors border-none"
+                  [ngModel]="a.status"
+                  (ngModelChange)="updateStatus($event)"
+                  aria-label="Update alert status"
+                  class="bg-blue-600 text-white rounded-lg px-4 py-2 font-medium hover:bg-blue-700 outline-none transition-colors border-none"
           >
             <option value="New">New</option>
             <option value="In Progress">In Progress</option>
@@ -38,10 +38,10 @@
     <!-- KPI Cards -->
     <div class="bg-gray-900/50 border-b border-gray-800 px-6 py-4">
       <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-        <app-metric-card label="Impacted Assets" value="3" />
-        <app-metric-card label="Suspicious IPs" value="2" />
-        <app-metric-card label="Users Involved" value="1" />
-        <app-metric-card label="Risk Score" value="88/100" />
+        <app-metric-card label="Impacted Assets" value="3"/>
+        <app-metric-card label="Suspicious IPs" value="2"/>
+        <app-metric-card label="Users Involved" value="1"/>
+        <app-metric-card label="Risk Score" value="88/100"/>
       </div>
     </div>
 
@@ -53,24 +53,47 @@
         <div class="space-y-3">
           @for (entity of entities(); track entity.id) {
             <div
-              (click)="selectEntity(entity)"
-              [class.border-blue-500]="selectedEntity()?.id === entity.id"
-              [class.bg-gray-800]="selectedEntity()?.id === entity.id"
-              class="p-3 rounded-lg border border-gray-800 hover:border-gray-700 cursor-pointer transition-all"
+                    (click)="selectEntity(entity)"
+                    [class.border-blue-500]="selectedEntity()?.id === entity.id"
+                    [class.bg-gray-800]="selectedEntity()?.id === entity.id"
+                    class="p-3 rounded-lg border border-gray-800 hover:border-gray-700 cursor-pointer transition-all"
             >
               <div class="flex items-center gap-3">
-                 <div class="h-8 w-8 rounded bg-gray-900 flex items-center justify-center text-gray-400">
-                    @switch (entity.type) {
-                      @case ('IP') { <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect></svg> }
-                      @case ('Domain') { <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg> }
-                      @case ('User') { <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> }
-                      @case ('Process') { <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline></svg> }
+                <div class="h-8 w-8 rounded bg-gray-900 flex items-center justify-center text-gray-400">
+                  @switch (entity.type) {
+                    @case ('IP') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                      </svg>
                     }
-                 </div>
-                 <div class="min-w-0">
-                   <div class="text-sm font-medium truncate">{{ entity.name }}</div>
-                   <div class="text-[10px] text-gray-500 uppercase">{{ entity.type }}</div>
-                 </div>
+                    @case ('Domain') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                      </svg>
+                    }
+                    @case ('User') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    }
+                    @case ('Process') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                      </svg>
+                    }
+                  }
+                </div>
+                <div class="min-w-0">
+                  <div class="text-sm font-medium truncate">{{ entity.name }}</div>
+                  <div class="text-[10px] text-gray-500 uppercase">{{ entity.type }}</div>
+                </div>
               </div>
             </div>
           }
@@ -92,31 +115,82 @@
       </aside>
 
       <!-- Center Panel: Graph View -->
-      <section class="flex-1 relative bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:24px_24px] flex items-center justify-center p-8 overflow-auto">
+      <section
+              class="flex-1 relative bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:24px_24px] p-6 overflow-auto">
         <div class="relative">
-          <!-- Root Alert Node -->
-          <div class="z-20 relative bg-gray-900 border-2 border-blue-500 rounded-xl p-4 w-64 shadow-2xl mb-24 mx-auto">
-            <div class="text-[10px] text-blue-400 font-bold uppercase tracking-widest mb-1">Source Alert</div>
-            <div class="text-sm font-bold truncate">{{ a.title }}</div>
-          </div>
+          <f-flow
+                  class="block h-[520px] max-h-[calc(100dvh-8rem)] min-h-[320px] w-full rounded-[18px] border border-[#bbc7e3] bg-[linear-gradient(160deg,_#f8fbff_0%,_#edf2fc_100%)] shadow-[0_22px_50px_-28px_#31497770]"
+                  fDraggable
+          >
+            <f-canvas fZoom>
+              @if (rootNode(); as root) {
+                <div
+                  fNode
+                  fDragHandle
+                  [fNodeId]="root.id"
+                  [fNodePosition]="root.position"
+                  class="z-20 relative bg-gray-900 border-2 border-blue-500 rounded-xl p-4 w-64 shadow-2xl"
+                >
+                  <div class="text-[10px] text-blue-400 font-bold uppercase tracking-widest mb-1">Source Alert</div>
+                  <div class="text-sm font-bold truncate">{{ a.title }}</div>
+                  <span
+                    fNodeOutput
+                    [fOutputId]="root.outputId"
+                    [fOutputMultiple]="true"
+                    fOutputConnectableSide="bottom"
+                    class="absolute left-1/2 -translate-x-1/2 -bottom-2 h-3 w-3 rounded-full border border-blue-300 bg-blue-500"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+              }
 
-          <!-- Entity Nodes arranged in a semi-circle/grid below -->
-          <div class="flex flex-wrap justify-center gap-8 max-w-4xl">
-            @for (entity of entities(); track entity.id) {
-              <div class="relative">
-                <!-- Simple SVG line connector (mocked) -->
-                <div class="absolute -top-12 left-1/2 -translate-x-1/2 h-12 w-px bg-blue-500/30"></div>
-                <app-investigation-node-card [entity]="entity" />
+              @for (node of entityNodes(); track node.id) {
+                <div
+                  fNode
+                  fDragHandle
+                  [fNodeId]="node.id"
+                  [fNodePosition]="node.position"
+                  class="outline-none rounded-lg"
+                  [attr.aria-label]="'Entity node: ' + node.entity.name"
+                  tabindex="0"
+                  (click)="selectEntity(node.entity)"
+                  (keydown.enter)="selectEntity(node.entity)"
+                  (keydown.space)="$event.preventDefault(); selectEntity(node.entity)"
+                >
+                  <app-investigation-node-card [entity]="node.entity" />
+                  <span
+                    fNodeInput
+                    [fInputId]="node.inputId"
+                    fInputConnectableSide="top"
+                    class="absolute left-1/2 -translate-x-1/2 -top-2 h-3 w-3 rounded-full border border-blue-300 bg-blue-500"
+                    aria-hidden="true"
+                  ></span>
+                </div>
+              }
+
+              @for (connection of graphConnections(); track connection.id) {
+                <f-connection
+                  [fConnectionId]="connection.id"
+                  [fOutputId]="connection.outputId"
+                  [fInputId]="connection.inputId"
+                  fType="bezier"
+                />
+              }
+            </f-canvas>
+          </f-flow>
+
+          <div class="absolute right-0 flex flex-col gap-2">
+            <div class="bg-gray-800/80 backdrop-blur-sm p-3 rounded-lg border border-gray-700 text-xs text-gray-400">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                Connected
               </div>
-            }
+              <div class="flex items-center gap-2">
+                <div class="h-2 w-2 rounded-full bg-red-500"></div>
+                Malicious
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="absolute bottom-6 right-6 flex flex-col gap-2">
-           <div class="bg-gray-800/80 backdrop-blur-sm p-3 rounded-lg border border-gray-700 text-xs text-gray-400">
-             <div class="flex items-center gap-2 mb-1"><div class="h-2 w-2 rounded-full bg-blue-500"></div> Connected</div>
-             <div class="flex items-center gap-2"><div class="h-2 w-2 rounded-full bg-red-500"></div> Malicious</div>
-           </div>
         </div>
       </section>
 
@@ -124,8 +198,12 @@
       <aside class="w-96 border-l border-gray-800 bg-gray-900/30 flex flex-col">
         <!-- Tabs -->
         <div class="flex border-b border-gray-800">
-          <button class="flex-1 px-4 py-3 text-xs font-bold uppercase tracking-widest text-blue-400 border-b-2 border-blue-500">Timeline</button>
-          <button class="flex-1 px-4 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-gray-300">Notes</button>
+          <button class="flex-1 px-4 py-3 text-xs font-bold uppercase tracking-widest text-blue-400 border-b-2 border-blue-500">
+            Timeline
+          </button>
+          <button class="flex-1 px-4 py-3 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-gray-300">
+            Notes
+          </button>
         </div>
 
         <div class="flex-1 overflow-y-auto p-6">
@@ -133,7 +211,7 @@
             <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">Activity Log</h3>
             <div class="space-y-1">
               @for (item of timeline(); track item.id) {
-                <app-timeline-item [item]="item" />
+                <app-timeline-item [item]="item"/>
               }
             </div>
           </div>
@@ -142,13 +220,13 @@
             <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Annotate Findings</h3>
             <div class="space-y-4">
               <textarea
-                [(ngModel)]="noteText"
-                placeholder="Write a note..."
-                class="w-full bg-gray-800 border-gray-700 text-white rounded-lg p-3 text-sm min-h-[100px] outline-none focus:ring-2 focus:ring-blue-500"
+                      [(ngModel)]="noteText"
+                      placeholder="Write a note..."
+                      class="w-full bg-gray-800 border-gray-700 text-white rounded-lg p-3 text-sm min-h-[100px] outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
               <button
-                (click)="addNote()"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 text-sm font-bold transition-colors"
+                      (click)="addNote()"
+                      class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2 text-sm font-bold transition-colors"
               >
                 Save Note
               </button>
